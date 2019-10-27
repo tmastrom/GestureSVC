@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-#import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler(feature_range = (0, 1))
 
@@ -19,6 +18,7 @@ dataset = pd.concat(frames)
 
 dataset_train = dataset.iloc[np.random.permutation(len(dataset))]
 dataset_train.reset_index(drop=True)
+
 
 X_train = []
 y_train = []
@@ -58,9 +58,32 @@ print("Train Data size X and y")
 print(X_train.shape)
 print(y_train.shape)
 
-print(X_train[0][0])
-plt.plot(X_train[0][0])
-plt.show()
+print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
+#plt.plot(X_train[0][0])
+#plt.show()
 
 
 # Wavelet Transform
+import pywt
+from sklearn.svm import SVC
+
+# Daubechies coefficients
+cA, cD = pywt.dwt(X_train[0][0], 'db1')
+
+print(cA) # [ 10.60660172  -2.12132034 -65.05382387   1.41421356]
+print(cD) # [  7.77817459   2.12132034 -26.87005769  -2.82842712]
+
+rock = [] 
+paper = []
+scissors = []
+ok = []
+# get Daubechies coefficients for entire training set
+
+'''for i in range(0, X_train.shape[0]):
+    # create vectors for each gesture using the Daubechies transform 
+    if y_train[i] == 0:
+        #cA, cD = pywt.dwt(, 'db1')
+    if y_train[i] == 1
+    if y_train[i] == 2
+    if y_train[i] == 3
+    '''
