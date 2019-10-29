@@ -19,7 +19,6 @@ dataset = pd.concat(frames)
 dataset_train = dataset.iloc[np.random.permutation(len(dataset))]
 dataset_train.reset_index(drop=True)
 
-
 X_train = []
 y_train = []
 
@@ -36,7 +35,7 @@ y_train = np.array(y_train)
 #X_train = sc.fit_transform(X_train)
 
 # Reshape again after normalization to (-1, 8, 8)
-X_train = X_train.reshape((-1, 8, 8))
+X_train = X_train.reshape((-1, 8, 8))   
 
 # Convert to one hot
 y_train = np.eye(np.max(y_train) + 1)[y_train]
@@ -63,8 +62,22 @@ print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
 #plt.show()
 
 
+# PCA
+from sklearn.decomposition import PCA
+
+# instance of the model retaining 95% of the variance
+pca = PCA(.95)
+
+pca.fit(X_train) # dimensionality is too high
+
+
+
+
+'''
+
 # Wavelet Transform
 import pywt
+
 from sklearn.svm import SVC
 
 # Daubechies coefficients
@@ -78,7 +91,7 @@ paper = []
 scissors = []
 ok = []
 # get Daubechies coefficients for entire training set
-
+'''
 '''for i in range(0, X_train.shape[0]):
     # create vectors for each gesture using the Daubechies transform 
     if y_train[i] == 0:
