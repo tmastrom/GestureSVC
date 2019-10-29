@@ -58,6 +58,9 @@ print(X_train.shape)
 print(y_train.shape)
 
 print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
+print(y_train[0])
+print(y_train[7000])
+print(y_train[350])
 #plt.plot(X_train[0][0])
 #plt.show()
 
@@ -66,9 +69,9 @@ print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
 from sklearn.decomposition import PCA
 
 # instance of the model retaining 95% of the variance
-pca = PCA(.95)
+#pca = PCA(.95)
 
-pca.fit(X_train) # dimensionality is too high
+#pca.fit(X_train) # dimensionality is too high
 
 
 
