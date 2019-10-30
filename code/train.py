@@ -5,9 +5,6 @@ import os
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler(feature_range = (0, 1))
 
-#print(tf.VERSION)
-#print(tf.keras.__version__)
-
 rock_dataset = pd.read_csv("../input/0.csv", header=None) # class = 0
 scissors_dataset = pd.read_csv("../input/1.csv", header=None) # class = 1
 paper_dataset = pd.read_csv("../input/2.csv", header=None) # class = 2
@@ -31,8 +28,8 @@ X_train = np.array(X_train)
 y_train = np.array(y_train)
 
 # Reshape to one flatten vector
-#X_train = X_train.reshape(X_train.shape[0]*X_train.shape[1], 1)
-#X_train = sc.fit_transform(X_train)
+X_train = X_train.reshape(X_train.shape[0]*X_train.shape[1], 1)
+X_train = sc.fit_transform(X_train)
 
 # Reshape again after normalization to (-1, 8, 8)
 X_train = X_train.reshape((-1, 8, 8))   
@@ -59,11 +56,6 @@ print(y_train.shape)
 
 print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
 print(y_train[0])
-print(y_train[7000])
-print(y_train[350])
-#plt.plot(X_train[0][0])
-#plt.show()
-
 
 # PCA
 from sklearn.decomposition import PCA
@@ -72,9 +64,6 @@ from sklearn.decomposition import PCA
 #pca = PCA(.95)
 
 #pca.fit(X_train) # dimensionality is too high
-
-
-
 
 '''
 
@@ -93,13 +82,5 @@ rock = []
 paper = []
 scissors = []
 ok = []
-# get Daubechies coefficients for entire training set
+# create vectors for each gesture using the Daubechies transform 
 '''
-'''for i in range(0, X_train.shape[0]):
-    # create vectors for each gesture using the Daubechies transform 
-    if y_train[i] == 0:
-        #cA, cD = pywt.dwt(, 'db1')
-    if y_train[i] == 1
-    if y_train[i] == 2
-    if y_train[i] == 3
-    '''
