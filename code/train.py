@@ -5,6 +5,7 @@ import os
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler(feature_range = (0, 1))
 
+
 rock_dataset = pd.read_csv("../input/0.csv", header=None) # class = 0
 scissors_dataset = pd.read_csv("../input/1.csv", header=None) # class = 1
 paper_dataset = pd.read_csv("../input/2.csv", header=None) # class = 2
@@ -76,45 +77,6 @@ print(y_train.shape)
 print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
 print(y_train[0])
 
-colours = ['red','blue','green','black','orange']
-
-for i in range(0, 5):
-    colour = colours[i]
-    for j in range(0,7):
-        plt.plot(X_train[i][j], color=colour)
-        
-#plt.legend()
-plt.show()
+np.savez_compressed('train', a=X_train, b=y_train, c=X_test, d=y_test)
 
 
-
-
-
-
-# PCA
-#from sklearn.decomposition import PCA
-
-# instance of the model retaining 95% of the variance
-#pca = PCA(.95)
-
-#pca.fit(X_train) # dimensionality is too high
-
-'''
-
-# Wavelet Transform
-import pywt
-
-from sklearn.svm import SVC
-
-# Daubechies coefficients
-cA, cD = pywt.dwt(X_train[0][0], 'db1')
-
-print(cA) # [ 10.60660172  -2.12132034 -65.05382387   1.41421356]
-print(cD) # [  7.77817459   2.12132034 -26.87005769  -2.82842712]
-
-rock = [] 
-paper = []
-scissors = []
-ok = []
-# create vectors for each gesture using the Daubechies transform 
-'''
