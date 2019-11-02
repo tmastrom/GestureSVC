@@ -12,7 +12,9 @@ ok_dataset = pd.read_csv("../input/3.csv", header=None) # class = 3
 
 frames = [rock_dataset, scissors_dataset, paper_dataset, ok_dataset]
 dataset = pd.concat(frames)
+# size = (11678, 65)
 
+# scramble up all the rows
 dataset_train = dataset.iloc[np.random.permutation(len(dataset))]
 dataset_train.reset_index(drop=True)
 
@@ -27,15 +29,32 @@ for i in range(0, dataset_train.shape[0]):
 X_train = np.array(X_train)
 y_train = np.array(y_train)
 
-# Reshape to one flatten vector
-X_train = X_train.reshape(X_train.shape[0]*X_train.shape[1], 1)
-X_train = sc.fit_transform(X_train)
+print("np.array")
+print(X_train.shape)
 
+
+# Reshape to flatten vector
+X_train = X_train.reshape(X_train.shape[0]*X_train.shape[1], 1)
+
+'''
+print("reshape")
+print(X_train.shape)
+'''
+
+X_train = sc.fit_transform(X_train)
+'''
+print("fit transform")
+print(X_train.shape)
+'''
 # Reshape again after normalization to (-1, 8, 8)
 X_train = X_train.reshape((-1, 8, 8))   
+'''print("reshape")
+print(X_train.shape)
 
-# Convert to one hot
-y_train = np.eye(np.max(y_train) + 1)[y_train]
+print("ytrain")
+print(y_train.shape)
+print(y_train)
+'''
 
 print("All Data size X and y")
 print(X_train.shape)
@@ -57,8 +76,23 @@ print(y_train.shape)
 print(X_train[0][0]) # [ 13.   2.   0.  -3. -65. -27.  -1.   3.]
 print(y_train[0])
 
+colours = ['red','blue','green','black','orange']
+
+for i in range(0, 5):
+    colour = colours[i]
+    for j in range(0,7):
+        plt.plot(X_train[i][j], color=colour)
+        
+#plt.legend()
+plt.show()
+
+
+
+
+
+
 # PCA
-from sklearn.decomposition import PCA
+#from sklearn.decomposition import PCA
 
 # instance of the model retaining 95% of the variance
 #pca = PCA(.95)
