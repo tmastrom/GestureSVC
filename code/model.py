@@ -15,6 +15,7 @@ print(X_test.shape)
 print(y_test.shape)
 
 # visualize data 
+'''
 colours = ['red','blue','green','black','orange']
 
 for i in range(0, 5):
@@ -22,8 +23,9 @@ for i in range(0, 5):
     for j in range(0,7):
         plt.plot(X_train[i][j], color=colour)
         
-#plt.legend()
+plt.legend()
 plt.show()
+'''
 
 
 
