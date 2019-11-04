@@ -33,8 +33,7 @@ for i,j in dfTrain.iterrows():
     #print(j)
 # for testing only do one iteration
     '''if(i >= 0):
-        break
-'''
+        break'''
 # initialize arrays for saving sensor values 
     s0 = []
     s1 = []
@@ -70,11 +69,11 @@ for i,j in dfTrain.iterrows():
 # Perform wavelet transform on the timeseries data for each sensor
     cA, cD = pywt.dwt(s0, 'db1')
     c0 = np.append(cA, cD)
-'''
+    '''
     print(c0)
     print("cA: {}".format(cA) )
     print("cD: {}".format(cD))
-'''
+    '''
     cA, cD = pywt.dwt(s1, 'db1')
     c1 = np.append(cA, cD)
 

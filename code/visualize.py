@@ -11,8 +11,8 @@ df3 = pd.read_csv("../input/3.csv", header=None) # ok
 df = pd.concat([df0, df1, df2, df3])
 
 # do this for each class 
-X = df0.iloc[:, :-1].values
-Y = df0.iloc[:, -1].values
+X = df3.iloc[:, :-1].values
+Y = df3.iloc[:, -1].values
 
 
 # Split the dataset into Testing and Training sets
@@ -42,7 +42,7 @@ for i,j in dfTrain.iterrows():
 # for testing only do one iteration
     '''if(i >= 0):
         break'''
-        
+
     s0 = []
     s1 = []
     s2 = []
@@ -98,7 +98,36 @@ avgs6 = np.true_divide(avgs6,X_train.shape[0])
 avgs7 = np.true_divide(avgs7,X_train.shape[0])
 
 # display average waveform for each
+fig = plt.figure()
+ax0 = fig.add_subplot(811)
+ax1 = fig.add_subplot(812)
+ax2 = fig.add_subplot(813)
+ax3 = fig.add_subplot(814)
+ax4 = fig.add_subplot(815)
+ax5 = fig.add_subplot(816)
+ax6 = fig.add_subplot(817)
+ax7 = fig.add_subplot(818)
 
+xax = list(range(0,8))
+print(len(xax))
+
+ax0.plot(xax, avgs0,  linestyle='-', marker='')
+ax0.title.set_text('Sensor0')
+ax1.plot(xax, avgs1,  linestyle='-', marker='')
+ax1.title.set_text('Sensor1')
+ax2.plot(xax, avgs2,  linestyle='-', marker='')
+ax2.title.set_text('Sensor2')
+ax3.plot(xax, avgs3,  linestyle='-', marker='')
+ax3.title.set_text('Sensor3')
+ax4.plot(xax, avgs4,  linestyle='-', marker='')
+ax4.title.set_text('Sensor4')
+ax5.plot(xax, avgs5,  linestyle='-', marker='')
+ax5.title.set_text('Sensor5')
+ax6.plot(xax, avgs6,  linestyle='-', marker='')
+ax6.title.set_text('Sensor6')
+ax7.plot(xax, avgs7,  linestyle='-', marker='')
+ax7.title.set_text('Sensor7')
+plt.show()
 
 
 
@@ -143,35 +172,6 @@ print(s7)
 print(s8)
 
 
-fig = plt.figure()
-ax1 = fig.add_subplot(811)
-ax2 = fig.add_subplot(812)
-ax3 = fig.add_subplot(813)
-ax4 = fig.add_subplot(814)
-ax5 = fig.add_subplot(815)
-ax6 = fig.add_subplot(816)
-ax7 = fig.add_subplot(817)
-ax8 = fig.add_subplot(818)
 
-xax = list(range(0,8))
-print(len(xax))
-
-ax1.plot(xax, s1,  linestyle='-', marker='')
-ax1.title.set_text('Sensor1')
-ax2.plot(xax, s2,  linestyle='-', marker='')
-ax2.title.set_text('Sensor2')
-ax3.plot(xax, s3,  linestyle='-', marker='')
-ax3.title.set_text('Sensor3')
-ax4.plot(xax, s4,  linestyle='-', marker='')
-ax4.title.set_text('Sensor4')
-ax5.plot(xax, s5,  linestyle='-', marker='')
-ax5.title.set_text('Sensor5')
-ax6.plot(xax, s6,  linestyle='-', marker='')
-ax6.title.set_text('Sensor6')
-ax7.plot(xax, s7,  linestyle='-', marker='')
-ax7.title.set_text('Sensor7')
-ax8.plot(xax, s8,  linestyle='-', marker='')
-ax8.title.set_text('Sensor8')
-plt.show()
 
 '''
