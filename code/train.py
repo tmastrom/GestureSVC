@@ -2,12 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-'''
-df0 = pd.read_csv("../input/0.csv", names=['Sensor1','Sensor2',
-                                            'Sensor3','Sensor4',
-                                            'Sensor5','Sensor6',
-                                            'Sensor7','Sensor8', 'Class']) # rock
-'''
+import pywt
+
+# Load the data 
 df0 = pd.read_csv("../input/0.csv", header=None) # rock
 df1 = pd.read_csv("../input/1.csv", header=None) # scissors
 df2 = pd.read_csv("../input/2.csv", header=None) # paper
@@ -16,126 +13,29 @@ df = pd.concat([df0, df1, df2, df3])
 
 X = df.iloc[:, :-1].values
 Y = df.iloc[:, -1].values
+#print(X.shape)
+#print(Y.shape)
 
-print(X.shape)
-print(Y.shape)
-
-'''
-df0_x = df0.iloc[:, :-1].values
-df0_y = df0.iloc[:, -1].values
-
-#df0 = pd.DataFrame({'x': range(0,8), 'y1': })
-
-print(df0_x.shape)
-print(df0_y.shape)
-
-print(df0_x[0])
-s1 = []
-s2 = []
-s3 = []
-s4 = []
-s5 = []
-s6 = []
-s7 = []
-s8 = []
-
-for i in range(0, df0_x.shape[1], 8):
-    s1.append(df0_x[0][i])
-    s2.append(df0_x[0][i+1])
-    s3.append(df0_x[0][i+2])
-    s4.append(df0_x[0][i+3])
-    s5.append(df0_x[0][i+4])
-    s6.append(df0_x[0][i+5])
-    s7.append(df0_x[0][i+6])
-    s8.append(df0_x[0][i+7])
-    
-print(s1)
-print(len(s1))
-print(s2)
-
-print(s3)
-print(s4)
-print(s5)
-print(s6)
-print(s7)
-print(s8)
-
-
-fig = plt.figure()
-ax1 = fig.add_subplot(811)
-ax2 = fig.add_subplot(812)
-ax3 = fig.add_subplot(813)
-ax4 = fig.add_subplot(814)
-ax5 = fig.add_subplot(815)
-ax6 = fig.add_subplot(816)
-ax7 = fig.add_subplot(817)
-ax8 = fig.add_subplot(818)
-
-xax = list(range(0,8))
-print(len(xax))
-
-ax1.plot(xax, s1,  linestyle='-', marker='')
-ax1.title.set_text('Sensor1')
-ax2.plot(xax, s2,  linestyle='-', marker='')
-ax2.title.set_text('Sensor2')
-ax3.plot(xax, s3,  linestyle='-', marker='')
-ax3.title.set_text('Sensor3')
-ax4.plot(xax, s4,  linestyle='-', marker='')
-ax4.title.set_text('Sensor4')
-ax5.plot(xax, s5,  linestyle='-', marker='')
-ax5.title.set_text('Sensor5')
-ax6.plot(xax, s6,  linestyle='-', marker='')
-ax6.title.set_text('Sensor6')
-ax7.plot(xax, s7,  linestyle='-', marker='')
-ax7.title.set_text('Sensor7')
-ax8.plot(xax, s8,  linestyle='-', marker='')
-ax8.title.set_text('Sensor8')
-plt.show()
-
-'''
 
 # Split the dataset into Testing and Training sets
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
-
-print(X_train[1].shape)
-'''
-s1, s2, s3, s4, s5, s6, s7, s8 = []
-for i in range(0, X_train.shape[1], 8):
-    s1.append(df0_x[0][i])
-    s2.append(df0_x[0][i+1])
-    s3.append(df0_x[0][i+2])
-    s4.append(df0_x[0][i+3])
-    s5.append(df0_x[0][i+4])
-    s6.append(df0_x[0][i+5])
-    s7.append(df0_x[0][i+6])
-    s8.append(df0_x[0][i+7])
-
-for i in range(0, 10):
-    print('before')
-    x = X_train[i]
-    print(x)
-    x = x.reshape(8,8)
-    print(x)
-
-    X_train[i] = x.reshape(8,8)
-
-    print('after')
-    print(X_train[i])
-
-print(X_train.shape)
-'''
-
+#print(X_train[1].shape)
 
 # create dataframe from X_train array
 dfTrain = pd.DataFrame(X_train)
-print(dfTrain.shape)
+#print(X_train.shape)
 
-
+# Perform wavelet transform on training set to get feature vectors
+print('Training')
 for i,j in dfTrain.iterrows():
-    
     #print(j[0])
     #print(j)
+# for testing only do one iteration
+    '''if(i >= 0):
+        break
+'''
+# initialize arrays for saving sensor values 
     s0 = []
     s1 = []
     s2 = []
@@ -144,76 +44,160 @@ for i,j in dfTrain.iterrows():
     s5 = []
     s6 = []
     s7 = []
-    count = 0
 
+    count = 0
     for k in j:
-        print(k)
-    
+        #print(k)
         if( count % 8 == 0 ):
             s0.append(k)
+        if( count % 8 == 1 ):
+            s1.append(k)
+        if( count % 8 == 2 ):
+            s2.append(k)
+        if( count % 8 == 3 ):
+            s3.append(k)
+        if( count % 8 == 4 ):
+            s4.append(k)
+        if( count % 8 == 5 ):
+            s5.append(k)
+        if( count % 8 == 6 ):
+            s6.append(k)
+        if( count % 8 == 7 ):
+            s7.append(k)
 
         count += 1
 
-    if(i >= 0):
-        print(s0)
-        break
+# Perform wavelet transform on the timeseries data for each sensor
+    cA, cD = pywt.dwt(s0, 'db1')
+    c0 = np.append(cA, cD)
 '''
-    if( i % 8 == 1 ):
-        s0.append(j)
+    print(c0)
+    print("cA: {}".format(cA) )
+    print("cD: {}".format(cD))
+'''
+    cA, cD = pywt.dwt(s1, 'db1')
+    c1 = np.append(cA, cD)
 
+    cA, cD = pywt.dwt(s2, 'db1')
+    c2 = np.append(cA, cD)
 
-    if( i % 8 == 2 ):
-        s0.append(j)
+    cA, cD = pywt.dwt(s3, 'db1')
+    c3 = np.append(cA, cD)
 
-    if( i % 8 == 3 ):
-        s0.append(j)
+    cA, cD = pywt.dwt(s4, 'db1')
+    c4 = np.append(cA, cD)
 
+    cA, cD = pywt.dwt(s5, 'db1')
+    c5 = np.append(cA, cD)
 
-    if( i % 8 == 4 ):
-        s0.append(j)
+    cA, cD = pywt.dwt(s6, 'db1')
+    c6 = np.append(cA, cD)
 
+    cA, cD = pywt.dwt(s7, 'db1')
+    c7 = np.append(cA, cD)
 
-    if( i % 8 == 5 ):
-        s0.append(j)
+    c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
+    X_train[i] = c
+    #print(X_train[i])
 
-    if( i % 8 == 6 ):
-        s0.append(j)
+# Perform wavelet transform on the test data    
+print("Starting testing")
+dfTest = pd.DataFrame(X_test)
+for i,j in dfTest.iterrows():
+    #print(j[0])
+    #print(j)
 
-    if( i % 8 == 7 ):
-        s0.append(j)'''
-        
+# for testing only do one iteration
+    '''if(i >= 0):
+        break'''
+    s0 = []
+    s1 = []
+    s2 = []
+    s3 = []
+    s4 = []
+    s5 = []
+    s6 = []
+    s7 = []
+
+    count = 0
+    for k in j:
+        #print(k)
+        if( count % 8 == 0 ):
+            s0.append(k)
+        if( count % 8 == 1 ):
+            s1.append(k)
+        if( count % 8 == 2 ):
+            s2.append(k)
+        if( count % 8 == 3 ):
+            s3.append(k)
+        if( count % 8 == 4 ):
+            s4.append(k)
+        if( count % 8 == 5 ):
+            s5.append(k)
+        if( count % 8 == 6 ):
+            s6.append(k)
+        if( count % 8 == 7 ):
+            s7.append(k)
+        count += 1
     
+    cA, cD = pywt.dwt(s0, 'db1')
+    c0 = np.append(cA, cD)
+    
+    print(c0)
+    print("cA: {}".format(cA) )
+    print("cD: {}".format(cD))
 
+    cA, cD = pywt.dwt(s1, 'db1')
+    c1 = np.append(cA, cD)
 
-'''
-X_train= X_train.reshape(-1, 8, 8)
+    cA, cD = pywt.dwt(s2, 'db1')
+    c2 = np.append(cA, cD)
 
-print(X_train.shape)
-'''
-'''
+    cA, cD = pywt.dwt(s3, 'db1')
+    c3 = np.append(cA, cD)
 
+    cA, cD = pywt.dwt(s4, 'db1')
+    c4 = np.append(cA, cD)
 
+    cA, cD = pywt.dwt(s5, 'db1')
+    c5 = np.append(cA, cD)
+
+    cA, cD = pywt.dwt(s6, 'db1')
+    c6 = np.append(cA, cD)
+
+    cA, cD = pywt.dwt(s7, 'db1')
+    c7 = np.append(cA, cD)
+
+    c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
+    X_test[i] = c
+    #print(X_train[i])
+    
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-
-# Create Support Vector Classifier from the Training set
+from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
-clf = SVC(gamma='auto')
-clf.fit(X_train, y_train)
 
-# Use the classfier to predict Test results
-y_pred = clf.predict(X_test)
+# Test for optimal parameters 
+gammas = [0.001, 0.01, 0.1, 1]
+degrees = [0, 1, 2, 3, 4, 5, 6]
+cs = [0.1, 1, 10, 100, 1000]
+for c in cs:
+    print('RBF with C {}'.format(c))
+    # Create Support Vector Classifier from the Training set
+    
+    clf = SVC(kernel='rbf',C=c)
+    clf.fit(X_train, y_train)
 
-# Create confusion matrix
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test, y_pred)
-print(cm)
+    # Use the classfier to predict Test results
+    y_pred = clf.predict(X_test)
 
-print("Test set classification rate: {}".format(np.mean(y_pred == y_test)))
+    # Create confusion matrix
+    from sklearn.metrics import confusion_matrix
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
 
-#np.savez_compressed('train', a=X_train, b=y_train, c=X_test, d=y_test)
-'''
+    print("Test set classification rate: {}".format(np.mean(y_pred == y_test)))
