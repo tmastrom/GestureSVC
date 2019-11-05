@@ -11,8 +11,8 @@ df3 = pd.read_csv("../input/3.csv", header=None) # ok
 df = pd.concat([df0, df1, df2, df3])
 
 # do this for each class 
-X = df3.iloc[:, :-1].values
-Y = df3.iloc[:, -1].values
+X = df2.iloc[:, :-1].values
+Y = df2.iloc[:, -1].values
 
 
 # Split the dataset into Testing and Training sets
@@ -99,6 +99,7 @@ avgs7 = np.true_divide(avgs7,X_train.shape[0])
 
 # display average waveform for each
 fig = plt.figure()
+ax = fig.add_subplot(111)
 ax0 = fig.add_subplot(811)
 ax1 = fig.add_subplot(812)
 ax2 = fig.add_subplot(813)
@@ -112,66 +113,41 @@ xax = list(range(0,8))
 print(len(xax))
 
 ax0.plot(xax, avgs0,  linestyle='-', marker='')
-ax0.title.set_text('Sensor0')
+
+ax0.set_title('s0', loc='right', pad=-15)
 ax1.plot(xax, avgs1,  linestyle='-', marker='')
-ax1.title.set_text('Sensor1')
+ax1.set_title('s1', loc='right', pad=-15)
 ax2.plot(xax, avgs2,  linestyle='-', marker='')
-ax2.title.set_text('Sensor2')
+ax2.set_title('s2', loc='right', pad=-15)
+
 ax3.plot(xax, avgs3,  linestyle='-', marker='')
-ax3.title.set_text('Sensor3')
+ax3.set_title('s3', loc='right', pad=-15)
 ax4.plot(xax, avgs4,  linestyle='-', marker='')
-ax4.title.set_text('Sensor4')
+ax4.set_title('s4', loc='right', pad=-15)
 ax5.plot(xax, avgs5,  linestyle='-', marker='')
-ax5.title.set_text('Sensor5')
+ax5.set_title('s5', loc='right', pad=-15)
 ax6.plot(xax, avgs6,  linestyle='-', marker='')
-ax6.title.set_text('Sensor6')
+ax6.set_title('s6', loc='right', pad=-15)
 ax7.plot(xax, avgs7,  linestyle='-', marker='')
-ax7.title.set_text('Sensor7')
+ax7.set_title('s7', loc='right', pad=-15)
+
+ax0.set_ylim([-1.2, 1.2])
+ax1.set_ylim([-1.2, 1.2])
+ax2.set_ylim([-1.2, 1.2])
+ax3.set_ylim([-1.2, 1.2])
+ax4.set_ylim([-1.2, 1.2])
+ax5.set_ylim([-1.2, 1.2])
+ax6.set_ylim([-1.2, 1.2])
+ax7.set_ylim([-1.5, 1.2])
+
+# Turn off axis lines and ticks of the big subplot
+ax.spines['top'].set_color('none')
+ax.spines['bottom'].set_color('none')
+ax.spines['left'].set_color('none')
+ax.spines['right'].set_color('none')
+ax.tick_params(labelcolor='w', top='off', bottom='off', left='off', right='off')
+ax.set_title('Gesture "Paper"')
+ax.set_ylabel('Normalized sEMG Voltage')
+ax.set_xlabel('Time')
+
 plt.show()
-
-
-
-'''
-df0_x = df0.iloc[:, :-1].values
-df0_y = df0.iloc[:, -1].values
-
-#df0 = pd.DataFrame({'x': range(0,8), 'y1': })
-
-print(df0_x.shape)
-print(df0_y.shape)
-
-print(df0_x[0])
-s1 = []
-s2 = []
-s3 = []
-s4 = []
-s5 = []
-s6 = []
-s7 = []
-s8 = []
-
-for i in range(0, df0_x.shape[1], 8):
-    s1.append(df0_x[0][i])
-    s2.append(df0_x[0][i+1])
-    s3.append(df0_x[0][i+2])
-    s4.append(df0_x[0][i+3])
-    s5.append(df0_x[0][i+4])
-    s6.append(df0_x[0][i+5])
-    s7.append(df0_x[0][i+6])
-    s8.append(df0_x[0][i+7])
-    
-print(s1)
-print(len(s1))
-print(s2)
-
-print(s3)
-print(s4)
-print(s5)
-print(s6)
-print(s7)
-print(s8)
-
-
-
-
-'''

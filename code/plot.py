@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 '''
-Initial REsult
+Initial Result
 confusion_matrix = [[639,  15,  32,  20],
  [  3, 697,   5,   4],
  [  6,  22, 640,  78],
@@ -18,12 +18,7 @@ confusion_matrix = [[638,  14,  34,  20],
  [  6 , 23, 638 , 79],
  [ 37,  64,   9 ,649]]
 
-
-
 class_names = ['Rock', 'Scissors', 'Paper', 'Ok']
-
-
-
 
 def print_confusion_matrix(confusion_matrix, class_names, figsize = (10,7), fontsize=14):
     """Prints a confusion matrix, as returned by sklearn.metrics.confusion_matrix, as a heatmap.
