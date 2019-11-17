@@ -24,17 +24,69 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.25, rand
 
 # create dataframe from X_train array
 dfTrain = pd.DataFrame(X_train)
-#print(X_train.shape)
+'''
+print(X_train.shape)
+print(X_train[0])
+a = np.reshape(X_train[0], (8,8)).T
+print(a)
+'''
+
+'''for each len 64 vector in the training set
+reshape the vector to an 8x8 matrix 
+transpose so each row is 8 consecutive readings from a single sensor 
+'''
+#for i in range(0,X_train.shape[0]):
+for i in range(0,1):
+    print(X_train[i])
+
+    a = np.reshape(X_train[i], (8,8)).T
+    print(a)
+    # Perform dwt on each row vector
+    for j in range(0,8):
+        cA, cD = pywt.dwt(a[j], 'db1')
+        a[j] = np.append(cA, cD) # replace the vector with db coefficients
+
+    print("print a",a)
+    print("shape of a",a.shape)
+    print("shape of X_train" , X_train[i].shape)
+    X_train[i] = np.reshape(a, (1,-1))
+    print("reshaped training data",X_train[i])
+
+#for i in range(0,X_test.shape[0]):
+for i in range(0,1):
+    
+    print(X_test[i])
+
+    a = np.reshape(X_test[i], (8,8)).T
+    print(a)
+    # Perform dwt on each row vector
+    for j in range(0,8):
+        cA, cD = pywt.dwt(a[j], 'db1')
+        a[j] = np.append(cA, cD) # replace the vector with db coefficients
+
+    print("print a",a)
+    print("shape of a",a.shape)
+    print("shape of X_test" , X_test[i].shape)
+    X_test[i] = np.reshape(a, (1,-1))
+    print("reshaped training data",X_test[i])
 
 # Perform wavelet transform on training set to get feature vectors
-print('Training')
-for i,j in dfTrain.iterrows():
-    #print(j[0])
-    #print(j)
-# for testing only do one iteration
-    '''if(i >= 0):
-        break'''
+#print('Training')
+#for i,j in dfTrain.iterrows():
+    
+   # if i > 1:
+    #    break
+    
+    
+    #a = np.reshape(i, (8,8));
+   # print(a)
+    #print(" i " , i)
+    #print(" j " , j)
+    #print(a)
+
 # initialize arrays for saving sensor values 
+ 
+    '''   
     s0 = []
     s1 = []
     s2 = []
@@ -65,16 +117,17 @@ for i,j in dfTrain.iterrows():
             s7.append(k)
 
         count += 1
-
+    
 # Perform wavelet transform on the timeseries data for each sensor
-    cA, cD = pywt.dwt(s0, 'db1')
-    c0 = np.append(cA, cD)
+   
+   cA, cD = pywt.dwt(s0, 'db1')
+    c0 = np.append(cA, cD)'''
     '''
     print(c0)
     print("cA: {}".format(cA) )
     print("cD: {}".format(cD))
     '''
-    cA, cD = pywt.dwt(s1, 'db1')
+    '''  cA, cD = pywt.dwt(s1, 'db1')
     c1 = np.append(cA, cD)
 
     cA, cD = pywt.dwt(s2, 'db1')
@@ -98,7 +151,8 @@ for i,j in dfTrain.iterrows():
     c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
     X_train[i] = c
     #print(X_train[i])
-
+'''
+'''
 # Perform wavelet transform on the test data    
 print("Starting testing")
 dfTest = pd.DataFrame(X_test)
@@ -106,9 +160,6 @@ for i,j in dfTest.iterrows():
     #print(j[0])
     #print(j)
 
-# for testing only do one iteration
-    '''if(i >= 0):
-        break'''
     s0 = []
     s1 = []
     s2 = []
@@ -170,7 +221,7 @@ for i,j in dfTest.iterrows():
     c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
     X_test[i] = c
     #print(X_train[i])
-    
+
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
@@ -200,3 +251,5 @@ for c in cs:
     print(cm)
 
     print("Test set classification rate: {}".format(np.mean(y_pred == y_test)))
+        
+'''
