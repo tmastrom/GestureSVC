@@ -13,10 +13,18 @@ confusion_matrix = [[639,  15,  32,  20],
  '''
 
 # db1 feature vector, no optimization
+'''
 confusion_matrix = [[638,  14,  34,  20],
  [  2, 697,   5,   5],
  [  6 , 23, 638 , 79],
- [ 37,  64,   9 ,649]]
+ [ 37,  64,   9 ,649]]'''
+
+ # C = 10 , gamma = 0.01 from gridsearch
+confusion_matrix = [[666 ,  7,  25,   8],
+ [  2, 693 ,  5  , 9],
+ [ 10,  17, 667 , 52],
+ [ 34, 42 , 17 ,666]]
+# Test set classification rate: 0.9219178082191781
 
 class_names = ['Rock', 'Scissors', 'Paper', 'Ok']
 
