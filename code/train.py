@@ -13,23 +13,13 @@ df = pd.concat([df0, df1, df2, df3])
 
 X = df.iloc[:, :-1].values
 Y = df.iloc[:, -1].values
-#print(X.shape)
-#print(Y.shape)
-
 
 # Split the dataset into Testing and Training sets
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.25, random_state = 0)
-#print(X_train[1].shape)
 
 # create dataframe from X_train array
 dfTrain = pd.DataFrame(X_train)
-'''
-print(X_train.shape)
-print(X_train[0])
-a = np.reshape(X_train[0], (8,8)).T
-print(a)
-'''
 
 '''for each len 64 vector in the training set
 reshape the vector to an 8x8 matrix 
@@ -54,9 +44,7 @@ for i in range(0,1):
 
 #for i in range(0,X_test.shape[0]):
 for i in range(0,1):
-    
     print(X_test[i])
-
     a = np.reshape(X_test[i], (8,8)).T
     print(a)
     # Perform dwt on each row vector
@@ -69,158 +57,6 @@ for i in range(0,1):
     print("shape of X_test" , X_test[i].shape)
     X_test[i] = np.reshape(a, (1,-1))
     print("reshaped training data",X_test[i])
-
-# Perform wavelet transform on training set to get feature vectors
-#print('Training')
-#for i,j in dfTrain.iterrows():
-    
-   # if i > 1:
-    #    break
-    
-    
-    #a = np.reshape(i, (8,8));
-   # print(a)
-    #print(" i " , i)
-    #print(" j " , j)
-    #print(a)
-
-# initialize arrays for saving sensor values 
- 
-    '''   
-    s0 = []
-    s1 = []
-    s2 = []
-    s3 = []
-    s4 = []
-    s5 = []
-    s6 = []
-    s7 = []
-
-    count = 0
-    for k in j:
-        #print(k)
-        if( count % 8 == 0 ):
-            s0.append(k)
-        if( count % 8 == 1 ):
-            s1.append(k)
-        if( count % 8 == 2 ):
-            s2.append(k)
-        if( count % 8 == 3 ):
-            s3.append(k)
-        if( count % 8 == 4 ):
-            s4.append(k)
-        if( count % 8 == 5 ):
-            s5.append(k)
-        if( count % 8 == 6 ):
-            s6.append(k)
-        if( count % 8 == 7 ):
-            s7.append(k)
-
-        count += 1
-    
-# Perform wavelet transform on the timeseries data for each sensor
-   
-   cA, cD = pywt.dwt(s0, 'db1')
-    c0 = np.append(cA, cD)'''
-    '''
-    print(c0)
-    print("cA: {}".format(cA) )
-    print("cD: {}".format(cD))
-    '''
-    '''  cA, cD = pywt.dwt(s1, 'db1')
-    c1 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s2, 'db1')
-    c2 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s3, 'db1')
-    c3 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s4, 'db1')
-    c4 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s5, 'db1')
-    c5 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s6, 'db1')
-    c6 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s7, 'db1')
-    c7 = np.append(cA, cD)
-
-    c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
-    X_train[i] = c
-    #print(X_train[i])
-'''
-'''
-# Perform wavelet transform on the test data    
-print("Starting testing")
-dfTest = pd.DataFrame(X_test)
-for i,j in dfTest.iterrows():
-    #print(j[0])
-    #print(j)
-
-    s0 = []
-    s1 = []
-    s2 = []
-    s3 = []
-    s4 = []
-    s5 = []
-    s6 = []
-    s7 = []
-
-    count = 0
-    for k in j:
-        #print(k)
-        if( count % 8 == 0 ):
-            s0.append(k)
-        if( count % 8 == 1 ):
-            s1.append(k)
-        if( count % 8 == 2 ):
-            s2.append(k)
-        if( count % 8 == 3 ):
-            s3.append(k)
-        if( count % 8 == 4 ):
-            s4.append(k)
-        if( count % 8 == 5 ):
-            s5.append(k)
-        if( count % 8 == 6 ):
-            s6.append(k)
-        if( count % 8 == 7 ):
-            s7.append(k)
-        count += 1
-    
-    cA, cD = pywt.dwt(s0, 'db1')
-    c0 = np.append(cA, cD)
-    
-    print(c0)
-    print("cA: {}".format(cA) )
-    print("cD: {}".format(cD))
-
-    cA, cD = pywt.dwt(s1, 'db1')
-    c1 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s2, 'db1')
-    c2 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s3, 'db1')
-    c3 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s4, 'db1')
-    c4 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s5, 'db1')
-    c5 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s6, 'db1')
-    c6 = np.append(cA, cD)
-
-    cA, cD = pywt.dwt(s7, 'db1')
-    c7 = np.append(cA, cD)
-
-    c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
-    X_test[i] = c
-    #print(X_train[i])
 
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
@@ -251,5 +87,3 @@ for c in cs:
     print(cm)
 
     print("Test set classification rate: {}".format(np.mean(y_pred == y_test)))
-        
-'''
