@@ -60,13 +60,6 @@ print("Best parameters set found on development set:")
 print()
 print(clf.best_params_)
 '''
-#Best parameters set found on development set:
-#{'C': 10, 'gamma': 0.01}
-
-
-
-
-
 # Optimal paramters found using gridsearch
 c = 10
 g = 0.01
