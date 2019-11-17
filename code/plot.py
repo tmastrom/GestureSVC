@@ -13,10 +13,11 @@ confusion_matrix = [[639,  15,  32,  20],
  '''
 
 # db1 feature vector, no optimization
-confusion_matrix = [[638,  14,  34,  20],
- [  2, 697,   5,   5],
- [  6 , 23, 638 , 79],
- [ 37,  64,   9 ,649]]
+confusion_matrix = [[671,   5,  23,   7],
+ [  3, 689,   6,  11],
+ [ 11,  15, 674,  46],
+ [ 41,  37,  18, 663]]
+
 
 class_names = ['Rock', 'Scissors', 'Paper', 'Ok']
 

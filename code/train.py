@@ -221,7 +221,7 @@ for i,j in dfTest.iterrows():
     c = np.append(c0, [c1, c2, c3, c4, c5, c6, c7])
     X_test[i] = c
     #print(X_train[i])
-
+'''
 # Feature Scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
@@ -251,5 +251,3 @@ for c in cs:
     print(cm)
 
     print("Test set classification rate: {}".format(np.mean(y_pred == y_test)))
-        
-'''
